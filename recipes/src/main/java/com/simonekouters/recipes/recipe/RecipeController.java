@@ -16,7 +16,7 @@ public class RecipeController {
     private final RecipeRepository recipeRepository;
 
     @GetMapping
-    public List<Recipe> getAllRecipes() {
+    public Iterable<Recipe> getAllRecipes() {
         return recipeRepository.findAll();
     }
 
