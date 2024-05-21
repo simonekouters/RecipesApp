@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import axios from 'axios'
+import Recipe from '../Recipe/Recipe';
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 function RecipesList({API_URL, recipes, setRecipes}) {
+  const navigate = useNavigate();
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -17,11 +21,18 @@ function RecipesList({API_URL, recipes, setRecipes}) {
   }, []);
 
 
-  return (
-    recipes.map(recipe => {
-      return <li key={recipe.id}>{recipe.title}</li>
-    }) 
-  )
+  return ( 
+    <>
+      {recipes && (
+        <>
+          {recipes.map(recipe => <div onClick={() => navigate(`/recipes/${recipe.id}`)} key={recipe.id}>{recipe.title}</div>)}
+          <Routes>
+              <Route path="/recipes/:id" element={<Recipe />} />
+          </Routes>
+        </>
+      )}
+    </>
+  );
 }
 
 export default RecipesList;

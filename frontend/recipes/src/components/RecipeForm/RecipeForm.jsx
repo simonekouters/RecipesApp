@@ -19,7 +19,7 @@ function RecipeForm({recipes, setRecipes, API_URL}) {
       setRecipes([...recipes, newRecipe]);
       setRecipe({title: ""});
     } catch (error) {
-      console.error("Error adding task: ", error);
+      console.error("Error adding recipe: ", error);
     }
   }
 
