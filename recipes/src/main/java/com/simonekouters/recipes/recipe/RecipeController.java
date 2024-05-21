@@ -8,6 +8,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+@CrossOrigin("${myApp.cors}")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("recipes")
