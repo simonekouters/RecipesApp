@@ -26,12 +26,11 @@ function Recipe() {
 
   return (
     <>
-      {/* <button onClick={}>Add recipe</button> */}
       {recipe && (
         <>
           <h1>{recipe.title}</h1>
-          <IngredientsList API_URL={API_URL} ingredients={ingredients} setIngredients={setIngredients} />
-          <IngredientForm ingredients={ingredients} setIngredients={setIngredients} API_URL={API_URL}/>
+          <IngredientForm ingredients={ingredients} setIngredients={setIngredients} API_URL={API_URL} />
+          <IngredientsList recipe={recipe} ingredients={ingredients} setIngredients={setIngredients} API_URL={API_URL} />
         </>
 
       )}

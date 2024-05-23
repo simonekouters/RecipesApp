@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 
-function IngredientForm({ingredients, setIngredients, API_URL}) {
+function IngredientForm({ ingredients, setIngredients, API_URL }) {
+  const URL = `${API_URL}/ingredients`;
   const[ingredient, setIngredient] = useState({name: ""});
 
   function handleInputChange(e) {
@@ -14,7 +15,7 @@ function IngredientForm({ingredients, setIngredients, API_URL}) {
       return;
     }
     try {
-      const response = await axios.post(API_URL, {name: ingredient.name});
+      const response = await axios.post(URL, {name: ingredient.name});
       const newIngredient = response.data;
       setIngredients([...ingredients, newIngredient]);
       setIngredient({name: ""});
