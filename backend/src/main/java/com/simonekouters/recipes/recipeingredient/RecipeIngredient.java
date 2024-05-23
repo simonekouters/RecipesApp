@@ -18,7 +18,7 @@ public class RecipeIngredient {
     private long Id;
     private Integer quantity;
     private String unit;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Ingredient ingredient;
 
     public RecipeIngredient(Ingredient ingredient, Integer quantity, String unit) {

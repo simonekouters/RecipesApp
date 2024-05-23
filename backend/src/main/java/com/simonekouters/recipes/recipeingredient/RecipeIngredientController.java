@@ -28,23 +28,4 @@ public class RecipeIngredientController {
         RecipeIngredient recipeIngredient = possiblyExistingRecipeIngredient.get();
         return ResponseEntity.ok().body(recipeIngredient);
     }
-
-    @PostMapping
-    public ResponseEntity<?> addRecipeIngredient(@RequestBody RecipeIngredient recipeIngredient, UriComponentsBuilder ucb) {
-        if (recipeIngredient.getIngredient() == null) {
-            return ResponseEntity.badRequest().body("Ingredient can't be null");
-        }
-        if (recipeIngredient.getQuantity() == null) {
-            return ResponseEntity.badRequest().body("Quantity can't be null");
-        }
-        if (recipeIngredient.getUnit() == null) {
-            return ResponseEntity.badRequest().body("Unit can't be null");
-        }
-        RecipeIngredient newRecipeIngredient = new RecipeIngredient(recipeIngredient.getIngredient(), recipeIngredient.getQuantity(), recipeIngredient.getUnit());
-
-        recipeIngredientRepository.save(newRecipeIngredient);
-
-        URI locationOfNewRecipeIngredient = ucb.path("/recipeingredients/{id}").buildAndExpand(newRecipeIngredient.getId()).toUri();
-        return ResponseEntity.created(locationOfNewRecipeIngredient).body(newRecipeIngredient);
-    }
 }
