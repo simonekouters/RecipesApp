@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cea3518c-5439-41cc-9b80-2a6125baf832" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/ingredient/IngredientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/ingredient/IngredientRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/recipe/RecipeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/recipe/RecipeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/recipeingredient/RecipeIngredient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/recipeingredient/RecipeIngredient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/recipeingredient/RecipeIngredientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/recipeingredient/RecipeIngredientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/Seeder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/Seeder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/recipe/Recipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/recipe/Recipe.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,7 +21,7 @@ public class Recipe {
     private long Id;
     private String title;
     @OneToMany
-    private Set<RecipeIngredient> ingredients;
+    private Set<RecipeIngredient> ingredients = new HashSet<>();
 
     public Recipe(String title) {
         this.title = title;

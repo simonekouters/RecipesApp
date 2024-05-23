@@ -24,12 +24,15 @@ public class Seeder implements CommandLineRunner {
             Recipe recipe1 = new Recipe("Apple pie");
             Recipe recipe2 = new Recipe("Tomato soup");
             recipeRepository.saveAll(List.of(recipe1, recipe2));
-        }
+            if (recipeIngredientRepository.count() == 0) {
+                RecipeIngredient recipeIngredient1 = new RecipeIngredient(new Ingredient("Salt"), 10, "grams");
+                RecipeIngredient recipeIngredient2 = new RecipeIngredient(new Ingredient("Sugar"), 100, "grams");
+                recipeIngredientRepository.saveAll(List.of(recipeIngredient1, recipeIngredient2));
 
-        if (recipeIngredientRepository.count() == 0) {
-            RecipeIngredient recipeIngredient1 = new RecipeIngredient(new Ingredient("Salt"), 10, "grams");
-            RecipeIngredient recipeIngredient2 = new RecipeIngredient(new Ingredient("Sugar"), 100, "grams");
-            recipeIngredientRepository.saveAll(List.of(recipeIngredient1, recipeIngredient2));
+                recipe1.getIngredients().add(recipeIngredient1);
+                recipe1.getIngredients().add(recipeIngredient2);
+                recipeRepository.save(recipe1);
+            }
         }
     }
 }
