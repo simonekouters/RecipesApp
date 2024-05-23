@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import axios from 'axios'
 
-function IngredientsList({ recipe, ingredients, setIngredients, API_URL }) {
+function IngredientsList({ ingredients, setIngredients, API_URL }) {
   const URL = `${API_URL}/ingredients`;
 
   useEffect(() => {

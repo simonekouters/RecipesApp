@@ -30,11 +30,9 @@ function Recipe() {
         <>
           <h1>{recipe.title}</h1>
           <IngredientForm ingredients={ingredients} setIngredients={setIngredients} API_URL={API_URL} />
-          <IngredientsList recipe={recipe} ingredients={ingredients} setIngredients={setIngredients} API_URL={API_URL} />
+          <IngredientsList ingredients={ingredients} setIngredients={setIngredients} API_URL={API_URL} />
         </>
-
-      )}
-      
+      )}  
     </>
   )
 }
