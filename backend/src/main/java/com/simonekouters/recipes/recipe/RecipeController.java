@@ -58,6 +58,8 @@ public class RecipeController {
         }
 
         Recipe newRecipe = new Recipe(recipe.getTitle());
+        recipeRepository.save(newRecipe);
+
         for (RecipeIngredient recipeIngredient : recipe.getIngredients()) {
             if (recipeIngredient.getIngredient() == null) {
                 return ResponseEntity.badRequest().body("Ingredient can't be null");
@@ -74,17 +76,15 @@ public class RecipeController {
                 }
                 ingredient = new Ingredient(recipeIngredient.getIngredient().getName());
             }
+
             if (recipeIngredient.getQuantity() == null) {
-                return ResponseEntity.badRequest().body("Quantity can't be null");
-            }
-            if (!recipeIngredient.getQuantity().toString().matches("-?\\d+(\\.\\d+)?")) {
-                return ResponseEntity.badRequest().body("Quantity must be a number");
+                return ResponseEntity.badRequest().body("Quantity should be a number");
             }
             if (recipeIngredient.getUnit() == null) {
                 return ResponseEntity.badRequest().body("Unit can't be null");
             }
 
-            RecipeIngredient newRecipeIngredient = new RecipeIngredient(ingredient, recipeIngredient.getQuantity(), recipeIngredient.getUnit(), recipe);
+            RecipeIngredient newRecipeIngredient = new RecipeIngredient(ingredient, recipeIngredient.getQuantity(), recipeIngredient.getUnit(), newRecipe);
             newRecipe.addIngredient(newRecipeIngredient);
         }
         recipeRepository.save(newRecipe);

@@ -31,6 +31,7 @@ public class Recipe {
     }
 
     public void addIngredient(RecipeIngredient ingredient) {
+        ingredient.setRecipe(this);
         ingredients.add(ingredient);
     }
 }
