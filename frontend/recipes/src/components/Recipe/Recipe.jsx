@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import IngredientsList from '../Ingredients/IngredientsList';
-import IngredientForm from '../IngredientForm/IngredientForm';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
@@ -28,8 +27,8 @@ function Recipe() {
     <>
       {recipe && (
         <>
-          <h1>{recipe.title}</h1>
-          <IngredientForm ingredients={ingredients} setIngredients={setIngredients} API_URL={API_URL} />
+          <h2>{recipe.title}</h2>
+          <h3>Ingredients</h3>
           <IngredientsList ingredients={ingredients} setIngredients={setIngredients} API_URL={API_URL} />
         </>
       )}  
