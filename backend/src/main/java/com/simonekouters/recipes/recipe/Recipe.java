@@ -1,5 +1,6 @@
 package com.simonekouters.recipes.recipe;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.simonekouters.recipes.recipeingredient.RecipeIngredient;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,12 +19,18 @@ import java.util.Set;
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
+    private long id;
     private String title;
-    @OneToMany
-    private Set<RecipeIngredient> ingredients = new HashSet<>();
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
+    private final Set<RecipeIngredient> ingredients = new HashSet<>();
 
     public Recipe(String title) {
         this.title = title;
+    }
+
+    public void addIngredient(RecipeIngredient ingredient) {
+        ingredients.add(ingredient);
     }
 }

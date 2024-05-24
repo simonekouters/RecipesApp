@@ -1,6 +1,8 @@
 package com.simonekouters.recipes.recipeingredient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.simonekouters.recipes.ingredient.Ingredient;
+import com.simonekouters.recipes.recipe.Recipe;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,12 +20,18 @@ public class RecipeIngredient {
     private long Id;
     private Integer quantity;
     private String unit;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+
+    @ManyToOne(cascade = CascadeType.ALL)
     private Ingredient ingredient;
 
-    public RecipeIngredient(Ingredient ingredient, Integer quantity, String unit) {
+    @JsonBackReference
+    @ManyToOne
+    private Recipe recipe;
+
+    public RecipeIngredient(Ingredient ingredient, Integer quantity, String unit, Recipe recipe) {
         this.ingredient = ingredient;
         this.quantity = quantity;
         this.unit = unit;
+        this.recipe = recipe;
     }
 }

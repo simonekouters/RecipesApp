@@ -16,23 +16,23 @@ import java.util.List;
 @Component
 public class Seeder implements CommandLineRunner {
     private final RecipeRepository recipeRepository;
-    private final IngredientRepository ingredientRepository;
-    private final RecipeIngredientRepository recipeIngredientRepository;
+
     @Override
     public void run(String... args) throws Exception {
         if (recipeRepository.count() == 0) {
             Recipe recipe1 = new Recipe("Apple pie");
             Recipe recipe2 = new Recipe("Tomato soup");
-            recipeRepository.saveAll(List.of(recipe1, recipe2));
-            if (recipeIngredientRepository.count() == 0) {
-                RecipeIngredient recipeIngredient1 = new RecipeIngredient(new Ingredient("Salt"), 10, "grams");
-                RecipeIngredient recipeIngredient2 = new RecipeIngredient(new Ingredient("Sugar"), 100, "grams");
-                recipeIngredientRepository.saveAll(List.of(recipeIngredient1, recipeIngredient2));
 
-                recipe1.getIngredients().add(recipeIngredient1);
-                recipe1.getIngredients().add(recipeIngredient2);
-                recipeRepository.save(recipe1);
-            }
+            RecipeIngredient recipeIngredient1 = new RecipeIngredient(new Ingredient("Salt"), 10, "grams", recipe1);
+            RecipeIngredient recipeIngredient2 = new RecipeIngredient(new Ingredient("Sugar"), 100, "grams", recipe1);
+            RecipeIngredient recipeIngredient3 = new RecipeIngredient(new Ingredient("Tomato"), 200, "grams", recipe2);
+
+            recipe1.addIngredient(recipeIngredient1);
+            recipe1.addIngredient(recipeIngredient2);
+            recipe2.addIngredient(recipeIngredient3);
+
+            recipeRepository.saveAll(List.of(recipe1, recipe2));
+
         }
     }
 }
