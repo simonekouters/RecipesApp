@@ -53,50 +53,43 @@ public class RecipeController {
         if (recipe.getTitle() == null) {
             return ResponseEntity.badRequest().body("Title can't be null");
         }
+        if (recipe.getIngredients().isEmpty()) {
+            return ResponseEntity.badRequest().body("A recipe needs ingredients");
+        }
+
         Recipe newRecipe = new Recipe(recipe.getTitle());
+        for (RecipeIngredient recipeIngredient : recipe.getIngredients()) {
+            if (recipeIngredient.getIngredient() == null) {
+                return ResponseEntity.badRequest().body("Ingredient can't be null");
+            }
+
+            var possiblyExistingIngredient = ingredientRepository.findByName(recipeIngredient.getIngredient().getName());
+
+            Ingredient ingredient;
+            if (possiblyExistingIngredient.isPresent()) {
+                ingredient = possiblyExistingIngredient.get();
+            } else {
+                if (recipeIngredient.getIngredient().getName() == null) {
+                    return ResponseEntity.badRequest().body("Ingredient name can't be null");
+                }
+                ingredient = new Ingredient(recipeIngredient.getIngredient().getName());
+            }
+            if (recipeIngredient.getQuantity() == null) {
+                return ResponseEntity.badRequest().body("Quantity can't be null");
+            }
+            if (!recipeIngredient.getQuantity().toString().matches("-?\\d+(\\.\\d+)?")) {
+                return ResponseEntity.badRequest().body("Quantity must be a number");
+            }
+            if (recipeIngredient.getUnit() == null) {
+                return ResponseEntity.badRequest().body("Unit can't be null");
+            }
+
+            RecipeIngredient newRecipeIngredient = new RecipeIngredient(ingredient, recipeIngredient.getQuantity(), recipeIngredient.getUnit(), recipe);
+            newRecipe.addIngredient(newRecipeIngredient);
+        }
         recipeRepository.save(newRecipe);
 
         URI locationOfNewRecipe = ucb.path("/recipes/{id}").buildAndExpand(newRecipe.getId()).toUri();
         return ResponseEntity.created(locationOfNewRecipe).body(newRecipe);
-    }
-
-    @PostMapping("{recipeId}/ingredients")
-    public ResponseEntity<?> addRecipeIngredient(@PathVariable long recipeId, @RequestBody RecipeIngredient recipeIngredient, UriComponentsBuilder ucb) {
-        var possiblyExistingRecipe = recipeRepository.findById(recipeId);
-        if (possiblyExistingRecipe.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        Recipe recipe = possiblyExistingRecipe.get();
-
-        if (recipeIngredient.getIngredient() == null) {
-            return ResponseEntity.badRequest().body("Ingredient can't be null");
-        }
-
-        var possiblyExistingIngredient = ingredientRepository.findByName(recipeIngredient.getIngredient().getName());
-        Ingredient ingredient;
-        if (possiblyExistingIngredient.isPresent()) {
-            ingredient = possiblyExistingIngredient.get();
-        } else {
-            if (recipeIngredient.getIngredient().getName() == null) {
-                return ResponseEntity.badRequest().body("Ingredient name can't be null");
-            }
-            ingredient = new Ingredient(recipeIngredient.getIngredient().getName());
-        }
-
-        if (recipeIngredient.getQuantity() == null) {
-            return ResponseEntity.badRequest().body("Quantity can't be null");
-        }
-        if (recipeIngredient.getUnit() == null) {
-            return ResponseEntity.badRequest().body("Unit can't be null");
-        }
-
-        RecipeIngredient newRecipeIngredient = new RecipeIngredient(ingredient, recipeIngredient.getQuantity(), recipeIngredient.getUnit());
-
-        recipeIngredientRepository.save(newRecipeIngredient);
-        recipe.getIngredients().add(newRecipeIngredient);
-        recipeRepository.save(recipe);
-
-        URI locationOfNewRecipeIngredient = ucb.path("/recipes/{recipeId}/ingredients/{id}").buildAndExpand(newRecipeIngredient.getId()).toUri();
-        return ResponseEntity.created(locationOfNewRecipeIngredient).body(newRecipeIngredient);
     }
 }
