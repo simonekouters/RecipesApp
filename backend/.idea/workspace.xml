@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="cea3518c-5439-41cc-9b80-2a6125baf832" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/ingredient/IngredientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/ingredient/IngredientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/recipe/RecipeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/recipe/RecipeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/recipe/RecipeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/recipe/RecipeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/recipeingredient/RecipeIngredientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/recipeingredient/RecipeIngredientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/recipes/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/recipes/src/App.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -18,8 +21,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="Record" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -40,6 +43,9 @@
   &quot;associatedIndex&quot;: 3
 }</component>
   <component name="ProjectId" id="2gljLr0eSClZSg1qWAG4T6lDPTe" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
