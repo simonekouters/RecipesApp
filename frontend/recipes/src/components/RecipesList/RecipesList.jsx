@@ -21,11 +21,11 @@ function RecipesList({API_URL, recipes, setRecipes, navigate}) {
       {recipes && (
         <>
           {recipes.map(recipe => (
-            <div onClick={() => navigate(`/recipes/${recipe.id}`)} key={recipe.id}>
+            <div className="recipe" onClick={() => navigate(`/recipes/${recipe.id}`)} key={recipe.id}>
               {recipe.title}
             </div>
           ))}
-          <button onClick={() => navigate("/add-recipe")}>Add Recipe</button>
+          <button className="add-button" onClick={() => navigate("/add-recipe")}>Add Recipe</button>
         </>
       )}
     </>

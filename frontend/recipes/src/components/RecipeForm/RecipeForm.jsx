@@ -1,11 +1,14 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import AddedIngredients from './AddedIngredients';
+import AddedSteps from './AddedSteps';
 
 function RecipeForm({ recipes, setRecipes, API_URL }) {
   const [recipe, setRecipe] = useState({ title: "" });
   const [newIngredient, setNewIngredient] = useState({ ingredient: { name: "" }, unit: "", quantity: "" });
   const [ingredients, setIngredients] = useState([]);
+  const [newStep, setNewStep] = useState("");
+  const [steps, setSteps] = useState([]);
 
 
   function handleAddIngredient(e) {
@@ -13,6 +16,12 @@ function RecipeForm({ recipes, setRecipes, API_URL }) {
     const ingredientToAdd = { ...newIngredient };
     setIngredients([...ingredients, ingredientToAdd]);
     setNewIngredient({ ingredient: { name: "" }, unit: "", quantity: "" });
+  }
+
+  function handleAddStep(e) {
+    e.preventDefault();
+    setSteps([...steps, newStep]);
+    setNewStep("");
   }
 
   async function handleSaveRecipe(e) {
@@ -23,12 +32,13 @@ function RecipeForm({ recipes, setRecipes, API_URL }) {
     console.log(ingredients);
 
     try {
-      const response = await axios.post(API_URL, { title: recipe.title, ingredients: ingredients });
+      const response = await axios.post(API_URL, { title: recipe.title, steps: steps, ingredients: ingredients });
       const newRecipe = response.data;
       setRecipes([...recipes, newRecipe]);
       console.log(recipes);
       setRecipe({ title: "" });
       setIngredients([]);
+      setSteps([]);
     } catch (error) {
       console.error("Error adding recipe: ", error);
     }
@@ -75,8 +85,19 @@ function RecipeForm({ recipes, setRecipes, API_URL }) {
         spellCheck="false"
       />
 
-      <button onClick={handleAddIngredient}>Add</button>
+      <button onClick={handleAddIngredient}>Add Ingredient</button>
       <AddedIngredients ingredients={ingredients} setIngredients={setIngredients} />
+
+      <label>Method</label>
+      <input 
+        type="text" 
+        value={newStep}
+        placeholder="Add a step"
+        onChange={(e) => setNewStep(e.target.value)}
+        spellCheck="false"
+      />
+      <button onClick={handleAddStep}>Add Step</button>
+      <AddedSteps steps={steps} setSteps={setSteps} />
 
       <button type="submit" onClick={handleSaveRecipe}>Save recipe</button>
     </form>

@@ -20,8 +20,8 @@ public class Seeder implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (recipeRepository.count() == 0) {
-            Recipe recipe1 = new Recipe("Apple pie");
-            Recipe recipe2 = new Recipe("Tomato soup");
+            Recipe recipe1 = new Recipe("Apple pie", List.of("cut apples", "mix butter and sugar"));
+            Recipe recipe2 = new Recipe("Tomato soup", List.of("wash tomatoes", "cut tomatoes"));
 
             RecipeIngredient recipeIngredient1 = new RecipeIngredient(new Ingredient("Salt"), 10, "grams", recipe1);
             RecipeIngredient recipeIngredient2 = new RecipeIngredient(new Ingredient("Sugar"), 100, "grams", recipe1);

@@ -8,7 +8,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,13 +23,16 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
+    @Column(length = 5000)
+    private List<String> steps = new ArrayList<>();
 
     @JsonManagedReference
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     private final Set<RecipeIngredient> ingredients = new HashSet<>();
 
-    public Recipe(String title) {
+    public Recipe(String title, List<String> steps) {
         this.title = title;
+        this.steps = steps;
     }
 
     public void addIngredient(RecipeIngredient ingredient) {

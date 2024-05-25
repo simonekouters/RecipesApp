@@ -56,8 +56,11 @@ public class RecipeController {
         if (recipe.getIngredients().isEmpty()) {
             return ResponseEntity.badRequest().body("A recipe needs ingredients");
         }
+        if (recipe.getSteps() == null) {
+            return ResponseEntity.badRequest().body("A recipe needs a method");
+        }
 
-        Recipe newRecipe = new Recipe(recipe.getTitle());
+        Recipe newRecipe = new Recipe(recipe.getTitle(), recipe.getSteps());
         recipeRepository.save(newRecipe);
 
         for (RecipeIngredient recipeIngredient : recipe.getIngredients()) {
