@@ -4,9 +4,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios'
 
 function Recipe() {
-  const [title, setTitle] = useState("");
-  const [ingredients, setIngredients] = useState([]);
-  const [steps, setSteps] = useState([]);
+  const [recipe, setRecipe] = useState({title: "", ingredients: [], steps: []});
   const { id } = useParams();
   const API_URL = `http://localhost:8080/recipes/${id}`;
 
@@ -16,10 +14,7 @@ function Recipe() {
         const response = await axios(API_URL);
         const data = response.data;
         if (data) {
-          setTitle(data.title || "");
-          setIngredients(data.ingredients || []);
-          setSteps(data.steps || []);
-          
+          setRecipe({title: data.title || "", ingredients: data.ingredients || [], steps: data.steps || []});
         }
       } catch (error) {
         console.error("Error fetching data: ", error)
@@ -31,11 +26,11 @@ function Recipe() {
 
   return (
     <>
-      <h2>{title}</h2>
+      <h2>{recipe.title}</h2>
 
       <h3>Ingredients</h3>
       <ul>
-        {ingredients.map(ingredient => {
+        {recipe.ingredients.map(ingredient => {
           const formattedIngredient = `${ingredient.ingredient.name} - ${ingredient.quantity} ${ingredient.unit}`;
           return <li key={ingredient.id}>{formattedIngredient}</li>;
         })}
@@ -43,7 +38,7 @@ function Recipe() {
 
       <h3>Method</h3>
       <ul>
-        {steps.map((step, index) => (
+        {recipe.steps.map((step, index) => (
           <li key={index}>{`Step ${index + 1} - ${step}`}</li>
         ))}
       </ul>

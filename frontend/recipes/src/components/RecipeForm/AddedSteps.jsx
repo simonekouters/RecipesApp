@@ -1,14 +1,14 @@
 import React from 'react';
 
-function AddedSteps({ steps, setSteps }) {
+function AddedSteps({ recipe, setRecipe }) {
   function handleDeleteStep(stepToDelete) {
-    const updatedSteps = steps.filter((step) => step != stepToDelete);
-    setSteps(updatedSteps);
+    const updatedSteps = recipe.steps.filter((step) => step != stepToDelete);
+    setRecipe({...recipe, steps: updatedSteps});
   }
 
   return (
     <ul>
-      {steps.map((step, index) => (
+      {recipe.steps.map((step, index) => (
         <div className="added-steps" key={step + index}>
           <li>{`Step ${index + 1} - ${step}`}</li>
           <button onClick={() => handleDeleteStep(step)}>x</button>

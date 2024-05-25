@@ -1,14 +1,14 @@
 import React from 'react';
 
-function AddedIngredients({ ingredients, setIngredients }) {
+function AddedIngredients({ recipe, setRecipe }) {
   function handleDeleteIngredient(ingredientToDelete) {
-    const updatedIngredients = ingredients.filter((i) => i != ingredientToDelete);
-    setIngredients(updatedIngredients);
+    const updatedIngredients = recipe.ingredients.filter((i) => i != ingredientToDelete);
+    setRecipe({...recipe, ingredients: updatedIngredients});
   }
 
   return (
     <ul>
-      {ingredients.map((ingredient, index) => {
+      {recipe.ingredients.map((ingredient, index) => {
         const formattedIngredient = `${ingredient.ingredient.name} - ${ingredient.quantity} ${ingredient.unit}`;
         return (
           <div className="added-ingredients" key={ingredient + index}>
