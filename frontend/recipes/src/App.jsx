@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<RecipesList navigate={navigate} API_URL={API_URL} recipes={recipes} setRecipes={setRecipes} />} />
         <Route path="/recipes/:id" element={<Recipe />} />
-        <Route path="/add-recipe" element={<RecipeForm API_URL={API_URL} recipes={recipes} setRecipes={setRecipes} />} />
+        <Route path="/add-recipe" element={<RecipeForm API_URL={API_URL} recipes={recipes} setRecipes={setRecipes} navigate={navigate} />} />
       </Routes>
     </div>
   )
