@@ -17,7 +17,7 @@ import lombok.Setter;
 public class RecipeIngredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
+    private long id;
     private Integer quantity;
     private String unit;
 
