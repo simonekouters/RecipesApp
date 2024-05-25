@@ -1,10 +1,12 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import AddedIngredients from './AddedIngredients';
 
 function RecipeForm({ recipes, setRecipes, API_URL }) {
   const [recipe, setRecipe] = useState({ title: "" });
   const [newIngredient, setNewIngredient] = useState({ ingredient: { name: "" }, unit: "", quantity: "" });
   const [ingredients, setIngredients] = useState([]);
+
 
   function handleAddIngredient(e) {
     e.preventDefault();
@@ -12,7 +14,6 @@ function RecipeForm({ recipes, setRecipes, API_URL }) {
     setIngredients([...ingredients, ingredientToAdd]);
     setNewIngredient({ ingredient: { name: "" }, unit: "", quantity: "" });
   }
-
 
   async function handleSaveRecipe(e) {
     e.preventDefault();
@@ -27,17 +28,11 @@ function RecipeForm({ recipes, setRecipes, API_URL }) {
       setRecipes([...recipes, newRecipe]);
       console.log(recipes);
       setRecipe({ title: "" });
-      setNewIngredient({ ingredient: { name: "" }, unit: "", quantity: "" });
       setIngredients([]);
     } catch (error) {
       console.error("Error adding recipe: ", error);
     }
   }
-
-  const addedIngredients = ingredients.map(ingredient => {
-    const formattedIngredient = `${ingredient.ingredient.name} - ${ingredient.quantity} ${ingredient.unit}`;
-    return <li key={ingredient.ingredient.name}>{formattedIngredient}</li>
-  });
 
   return (
     <form>
@@ -58,7 +53,6 @@ function RecipeForm({ recipes, setRecipes, API_URL }) {
         placeholder="Add an ingredient"
         onChange={(e) => setNewIngredient({ ...newIngredient, ingredient: { name: e.target.value } })}
         spellCheck="false"
-        autoFocus
       />
       <label>Unit</label>
       <select value={newIngredient.unit}
@@ -68,8 +62,8 @@ function RecipeForm({ recipes, setRecipes, API_URL }) {
         <option value="g">g</option>
         <option value="l">L</option>
         <option value="ml">ml</option>
-        <option value="tsp">tsp.</option>
-        <option value="tbs">tbs.</option>
+        <option value="tsp">tsp</option>
+        <option value="tbs">tbs</option>
       </select>
 
       <label>Quantity</label>
@@ -79,11 +73,10 @@ function RecipeForm({ recipes, setRecipes, API_URL }) {
         placeholder="Add quantity"
         onChange={(e) => setNewIngredient({ ...newIngredient, quantity: e.target.value })}
         spellCheck="false"
-        autoFocus
       />
 
       <button onClick={handleAddIngredient}>Add</button>
-      <ul>{addedIngredients}</ul>
+      <AddedIngredients ingredients={ingredients} setIngredients={setIngredients} />
 
       <button type="submit" onClick={handleSaveRecipe}>Save recipe</button>
     </form>
