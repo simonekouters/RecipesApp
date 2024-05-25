@@ -2,6 +2,8 @@ package com.simonekouters.recipes.recipe;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface RecipeRepository extends CrudRepository<Recipe, Long> {
+import java.util.List;
 
+public interface RecipeRepository extends CrudRepository<Recipe, Long> {
+    public List<Recipe> findAll();
 }

@@ -1,5 +1,6 @@
 package com.simonekouters.recipes.recipeingredient;
 
+import com.simonekouters.recipes.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +11,7 @@ import java.net.URI;
 @CrossOrigin("${myApp.cors}")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("recipeingredients")
+@RequestMapping("recipe-ingredients")
 public class RecipeIngredientController {
     private final RecipeIngredientRepository recipeIngredientRepository;
 
@@ -20,12 +21,12 @@ public class RecipeIngredientController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<RecipeIngredient> getIngredient(@PathVariable long id) {
+    public RecipeIngredientDto getIngredient(@PathVariable long id) {
         var possiblyExistingRecipeIngredient = recipeIngredientRepository.findById(id);
         if (possiblyExistingRecipeIngredient.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException();
         }
         RecipeIngredient recipeIngredient = possiblyExistingRecipeIngredient.get();
-        return ResponseEntity.ok().body(recipeIngredient);
+        return RecipeIngredientDto.from(recipeIngredient);
     }
 }
