@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cea3518c-5439-41cc-9b80-2a6125baf832" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/Seeder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/Seeder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/recipe/Recipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/recipe/Recipe.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/recipe/RecipeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/simonekouters/recipes/recipe/RecipeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/recipes/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/recipes/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/recipes/src/components/Recipe/Recipe.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/recipes/src/components/Recipe/Recipe.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +19,7 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="Record" />
       </list>
     </option>
   </component>

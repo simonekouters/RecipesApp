@@ -3,6 +3,7 @@ package com.simonekouters.recipes.recipe;
 import com.simonekouters.recipes.ingredient.Ingredient;
 import com.simonekouters.recipes.ingredient.IngredientRepository;
 import com.simonekouters.recipes.recipeingredient.RecipeIngredient;
+import com.simonekouters.recipes.recipeingredient.RecipeIngredientDto;
 import com.simonekouters.recipes.recipeingredient.RecipeIngredientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -49,54 +50,54 @@ public class RecipeController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addRecipe(@RequestBody Recipe recipe, UriComponentsBuilder ucb) {
-        if (recipe.getTitle() == null) {
+    public ResponseEntity<?> addRecipe(@RequestBody RecipeDto recipeDto, UriComponentsBuilder ucb) {
+        if (recipeDto.title() == null) {
             return ResponseEntity.badRequest().body("Title can't be null");
         }
-        if (recipe.getIngredients().isEmpty()) {
+        if (recipeDto.recipeIngredients().isEmpty()) {
             return ResponseEntity.badRequest().body("A recipe needs ingredients");
         }
-        if (recipe.getSteps().isEmpty()) {
+        if (recipeDto.steps().isEmpty()) {
             return ResponseEntity.badRequest().body("A recipe needs steps");
         }
 
-        Recipe newRecipe = new Recipe(recipe.getTitle());
+        Recipe newRecipe = new Recipe(recipeDto.title());
         recipeRepository.save(newRecipe);
 
-        for(String step : recipe.getSteps()) {
+        for(String step : recipeDto.steps()) {
             newRecipe.addStep(step);
         }
 
-        for (RecipeIngredient recipeIngredient : recipe.getIngredients()) {
-            if (recipeIngredient.getIngredient() == null) {
+        for (RecipeIngredientDto recipeIngredientDto : recipeDto.recipeIngredients()) {
+            if (recipeIngredientDto.ingredient() == null) {
                 return ResponseEntity.badRequest().body("Ingredient can't be null");
             }
 
-            var possiblyExistingIngredient = ingredientRepository.findByName(recipeIngredient.getIngredient().getName());
+            var possiblyExistingIngredient = ingredientRepository.findByName(recipeIngredientDto.ingredient().name());
 
             Ingredient ingredient;
             if (possiblyExistingIngredient.isPresent()) {
                 ingredient = possiblyExistingIngredient.get();
             } else {
-                if (recipeIngredient.getIngredient().getName() == null) {
+                if (recipeIngredientDto.ingredient().name() == null) {
                     return ResponseEntity.badRequest().body("Ingredient name can't be null");
                 }
-                ingredient = new Ingredient(recipeIngredient.getIngredient().getName());
+                ingredient = new Ingredient(recipeIngredientDto.ingredient().name());
             }
 
-            if (recipeIngredient.getQuantity() == null) {
+            if (recipeIngredientDto.quantity() == null) {
                 return ResponseEntity.badRequest().body("Quantity should be a number");
             }
-            if (recipeIngredient.getUnit() == null) {
+            if (recipeIngredientDto.unit() == null) {
                 return ResponseEntity.badRequest().body("Unit can't be null");
             }
 
-            RecipeIngredient newRecipeIngredient = new RecipeIngredient(ingredient, recipeIngredient.getQuantity(), recipeIngredient.getUnit(), newRecipe);
+            RecipeIngredient newRecipeIngredient = new RecipeIngredient(ingredient, recipeIngredientDto.quantity(), recipeIngredientDto.unit(), newRecipe);
             newRecipe.addIngredient(newRecipeIngredient);
         }
         recipeRepository.save(newRecipe);
 
         URI locationOfNewRecipe = ucb.path("/recipes/{id}").buildAndExpand(newRecipe.getId()).toUri();
-        return ResponseEntity.created(locationOfNewRecipe).body(newRecipe);
+        return ResponseEntity.created(locationOfNewRecipe).body(RecipeDto.from(newRecipe));
     }
 }
