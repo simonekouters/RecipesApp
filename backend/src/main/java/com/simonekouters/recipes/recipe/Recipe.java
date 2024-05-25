@@ -23,20 +23,22 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
-    @Column(length = 5000)
     private List<String> steps = new ArrayList<>();
 
     @JsonManagedReference
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     private final Set<RecipeIngredient> ingredients = new HashSet<>();
 
-    public Recipe(String title, List<String> steps) {
+    public Recipe(String title) {
         this.title = title;
-        this.steps = steps;
     }
 
     public void addIngredient(RecipeIngredient ingredient) {
         ingredient.setRecipe(this);
         ingredients.add(ingredient);
+    }
+
+    public void addStep(String step) {
+        steps.add(step);
     }
 }
