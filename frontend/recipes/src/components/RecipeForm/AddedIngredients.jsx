@@ -1,4 +1,5 @@
 import React from 'react';
+import ListManager from './ListManager';
 
 function AddedIngredients({ recipe, setRecipe }) {
   function handleDeleteIngredient(ingredientToDelete) {
@@ -7,17 +8,12 @@ function AddedIngredients({ recipe, setRecipe }) {
   }
 
   return (
-    <ul>
-      {recipe.ingredients.map((ingredient, index) => {
-        const formattedIngredient = `${ingredient.ingredient.name} - ${ingredient.quantity} ${ingredient.unit}`;
-        return (
-          <div className="added-ingredients" key={ingredient + index}>
-            <li>{formattedIngredient}</li>
-            <button onClick={() => handleDeleteIngredient(ingredient)}>x</button>
-          </div>
-        );
-      })}
-    </ul>
+    <ListManager 
+      items={recipe.ingredients}
+      onDelete={handleDeleteIngredient}
+      renderItem={(ingredient) => `${ingredient.ingredient.name} - ${ingredient.quantity} ${ingredient.unit}`}
+      itemKey={(ingredient, index) => `${ingredient.ingredient.name}-${index}`}
+    />
   );
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import ListManager from './ListManager';
 
 function AddedSteps({ recipe, setRecipe }) {
   function handleDeleteStep(stepToDelete) {
@@ -7,14 +8,12 @@ function AddedSteps({ recipe, setRecipe }) {
   }
 
   return (
-    <ul>
-      {recipe.steps.map((step, index) => (
-        <div className="added-steps" key={step + index}>
-          <li>{`Step ${index + 1} - ${step}`}</li>
-          <button onClick={() => handleDeleteStep(step)}>x</button>
-        </div>
-      ))}
-    </ul>
+    <ListManager 
+      items={recipe.steps}
+      onDelete={handleDeleteStep}
+      renderItem={(step, index) => `Step ${index + 1} - ${step}`}
+      itemKey={(step, index) => `${step}-${index}`}
+    />
   );
 }
 
