@@ -12,7 +12,7 @@ function AddedSteps({ recipe, setRecipe }) {
       items={recipe.steps}
       onDelete={handleDeleteStep}
       renderItem={(step, index) => `Step ${index + 1} - ${step}`}
-      itemKey={(step, index) => `${step}-${index}`}
+      itemKey={(step, index) => step + index}
     />
   );
 }

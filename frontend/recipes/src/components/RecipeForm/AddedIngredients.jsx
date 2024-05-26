@@ -12,7 +12,7 @@ function AddedIngredients({ recipe, setRecipe }) {
       items={recipe.ingredients}
       onDelete={handleDeleteIngredient}
       renderItem={(ingredient) => `${ingredient.ingredient.name} - ${ingredient.quantity} ${ingredient.unit}`}
-      itemKey={(ingredient, index) => `${ingredient.ingredient.name}-${index}`}
+      itemKey={(ingredient, index) => ingredient + index}
     />
   );
 }
