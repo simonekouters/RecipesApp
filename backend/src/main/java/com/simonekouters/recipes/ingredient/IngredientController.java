@@ -23,11 +23,7 @@ public class IngredientController {
 
     @GetMapping("{id}")
     public IngredientDto getIngredient(@PathVariable long id) {
-        var possiblyExistingIngredient = ingredientRepository.findById(id);
-        if (possiblyExistingIngredient.isEmpty()) {
-            throw new NotFoundException();
-        }
-        Ingredient ingredient = possiblyExistingIngredient.get();
+        var ingredient = ingredientRepository.findById(id).orElseThrow(NotFoundException::new);
         return IngredientDto.from(ingredient);
     }
 

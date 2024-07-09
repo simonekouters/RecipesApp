@@ -1,0 +1,38 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    cursor: pointer;
+}
+
+.add-button {
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 10px 15px;
+    font-size: medium;
+    border-style: none;
+    border-radius: 5px;
+    background-color: rgb(138, 138, 138);
+}
+
+.recipe {
+    padding: 10px;
+    margin-bottom: 5px;
+    width: 30%;
+    min-width: 200px;
+    cursor: pointer;
+    background-color: rgb(219, 219, 219);
+    font-size: medium;
+    border-radius: 5px;
+}
+
+label,
+button {
+    display: block;
+}
+
+.list-item {
+    display: flex;
+    gap: 10px;
+}

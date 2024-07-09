@@ -17,8 +17,9 @@ import lombok.Setter;
 public class RecipeIngredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private Integer quantity;
+    private Long id;
+
+    private int quantity;
     private String unit;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -28,7 +29,7 @@ public class RecipeIngredient {
     @ManyToOne
     private Recipe recipe;
 
-    public RecipeIngredient(Ingredient ingredient, Integer quantity, String unit, Recipe recipe) {
+    public RecipeIngredient(Ingredient ingredient, int quantity, String unit, Recipe recipe) {
         this.ingredient = ingredient;
         this.quantity = quantity;
         this.unit = unit;

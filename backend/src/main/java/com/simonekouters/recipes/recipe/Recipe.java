@@ -21,7 +21,8 @@ import java.util.Set;
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+
     private String title;
     private List<String> steps = new ArrayList<>();
 

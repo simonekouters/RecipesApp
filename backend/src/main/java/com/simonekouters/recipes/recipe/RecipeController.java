@@ -25,11 +25,7 @@ public class RecipeController {
 
     @GetMapping("{id}")
     public RecipeDto getRecipe(@PathVariable long id) {
-        var possiblyExistingRecipe = recipeRepository.findById(id);
-        if (possiblyExistingRecipe.isEmpty()) {
-            throw new NotFoundException();
-        }
-        Recipe recipe = possiblyExistingRecipe.get();
+        var recipe = recipeRepository.findById(id).orElseThrow(NotFoundException::new);
         return RecipeDto.from(recipe);
     }
 

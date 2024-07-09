@@ -22,11 +22,7 @@ public class RecipeIngredientController {
 
     @GetMapping("{id}")
     public RecipeIngredientDto getIngredient(@PathVariable long id) {
-        var possiblyExistingRecipeIngredient = recipeIngredientRepository.findById(id);
-        if (possiblyExistingRecipeIngredient.isEmpty()) {
-            throw new NotFoundException();
-        }
-        RecipeIngredient recipeIngredient = possiblyExistingRecipeIngredient.get();
+        var recipeIngredient = recipeIngredientRepository.findById(id).orElseThrow(NotFoundException::new);
         return RecipeIngredientDto.from(recipeIngredient);
     }
 }

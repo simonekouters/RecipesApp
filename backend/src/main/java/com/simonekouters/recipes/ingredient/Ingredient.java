@@ -15,7 +15,8 @@ import lombok.Setter;
 public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
+    private Long id;
+
     private String name;
 
     public Ingredient(String name) {
